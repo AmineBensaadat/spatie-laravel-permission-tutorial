@@ -49,9 +49,9 @@ Route::post('user/login', 'APILoginController@login');
 	// update Role
 	Route::put('updateRole/{id}', 'APIRolesController@updateRole');
 	// assigned Role to user
-	Route::put('RoleToUser/{id_role}/{id_user}', 'APIRolesController@RoleToUser');
+	Route::get('RoleToUser/{id_role}/{id_user}', 'APIRolesController@RoleToUser');
 	// removed role from a user
-	Route::post('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');
+	Route::get('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');
 
 
 //CRUD Users

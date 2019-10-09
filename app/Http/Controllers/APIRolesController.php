@@ -60,10 +60,10 @@ class APIRolesController extends Controller
     }
 
         // assigned Role to User
-     public function RemoveRoleToUser(Request $request)
+     public function RemoveRoleToUser($id_role, $id_user)
     {     
-           $role = Role::findById($request->input('id_role'));
-           $user = User::find($request->input('id_user'));
+           $role = Role::findById($id_role);
+           $user = User::find($id_user);
            $user->removeRole($role);
            
         return response()->json($user);
