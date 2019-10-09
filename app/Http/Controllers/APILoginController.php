@@ -35,7 +35,30 @@ class APILoginController extends Controller
         }catch(JWTException $e){
           return response()->json( ['error'=> 'could not create token'],500);
         }
-        return response()->json( compact('token'));
+
+
+       /* $data = \DB::table('model_has_roles')
+      ->select('users.name', 'roles.name')
+      ->join('users', 'users.id', '=', 'model_has_roles.model_id')
+      ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+      ->where('users.id', auth()->user()->id)
+      ->get();*/
+
+
+        //return response()->json( [compact('token'), 'user' =>  auth()->user() ]);
+
+      
+        //return  $data;
+      $user = User::find(auth()->user()->id);
+
+        /*dd($user->roles);
+       $users = User::select([])->with('roles');*/
+
+
+      
+       return response()->json(
+
+        [compact('token'), 'user' =>  auth()->user() , $user->roles->pluck('name') ]);
         
     }
 

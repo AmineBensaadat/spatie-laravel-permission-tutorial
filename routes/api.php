@@ -17,8 +17,38 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Register   
 Route::post('user/register', 'APIRegisterController@register');
-
+// Login
 Route::post('user/login', 'APILoginController@login');
-Route::get('permissions', 'APIPermissionController@getAllPermissions');
+
+//CRUD Permission
+	//get All Permissions
+	Route::get('permissions', 'APIPermissionController@getAllPermissions');
+	// create Permission
+	Route::post('createPermission', 'APIPermissionController@createPermission');
+	// delete Permission
+	Route::delete('deletePermission/{id}', 'APIPermissionController@deletePermission');
+	// updatePermission
+	Route::put('updatePermission/{id}', 'APIPermissionController@updatePermission');
+	// assigned permission to Role
+	Route::post('PermissionToRole', 'APIPermissionController@PermissionToRole');
+	// assigned permission to User
+	Route::post('PermissionToUser', 'APIPermissionController@PermissionToUser');
+	// revoked from a user
+	Route::post('RevokePermissionToUser', 'APIPermissionController@RevokePermissionToUser');
+
+
+//CRUD Roles
+	// get All Roles
+	Route::get('roles', 'APIRolesController@getAllRoles');
+	// create Role
+	Route::post('createrole', 'APIRolesController@createRole');
+	// delete Role
+	Route::delete('deleterole/{id}', 'APIRolesController@deleteRole');
+	// update Role
+	Route::put('updateRole/{id}', 'APIRolesController@updateRole');
+	// assigned Role to user
+	Route::post('RoleToUser', 'APIRolesController@RoleToUser');
+	// removed role from a user
+	Route::post('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');

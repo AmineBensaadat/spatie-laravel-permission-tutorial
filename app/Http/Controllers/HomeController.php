@@ -29,7 +29,7 @@ class HomeController extends Controller
         //Permission::create(['name' => 'edit post']);
 
         // ceate a role 
-        //Role::create(['name' => 'writer']);
+        //Role::create(['name' => 'ADMIN']);
        /* $role = Role::findById(1);
 
         // create permission 
@@ -39,15 +39,18 @@ class HomeController extends Controller
         $role->givePermissionTo($permission);
         $permission->assignRole($role);*/
         //var_dump($role);
-
         //auth()->user()->assignRole('writer');
         //auth()->user()->givePermissionTo('edit post');
+
+        // delete role
+        //$role = Role::findById(1);
+        //$role->delete();
         $user = User::find($userId);
 
         
         $role = Role::findByName($roleName);
         //dd($role);
-        //$user->assignRole($role);
+        $user->assignRole($role);
 
         return $role;
 
