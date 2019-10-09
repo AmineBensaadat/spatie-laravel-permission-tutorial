@@ -69,11 +69,11 @@ class APIUsersController extends Controller
 
            $validator = Validator::make($request -> all(),[
             'email' => 'string|email|max:255|unique:users',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'string',
+            'lastname' => 'string',
             'city' => 'string|max:255|',
             'birthday' => 'birthday',
-            'image' => 'mimes:jpeg,bmp,png',			
+            'image' => 'string',			
             'password' => 'lamepassword'
         ]);
 
@@ -82,20 +82,20 @@ class APIUsersController extends Controller
         }
 
         $request->merge([
-	    'user_id' => $request->input('email'),
-	    'email' => 'string|email|max:255|unique:users',
-        'firstname' => 'required',
-        'lastname' => 'required',
-        'city' => 'string|max:255|',
-        'birthday' => 'birthday',
-        'image' => 'mimes:jpeg,bmp,png',			
-         'password' => 'lamepassword'
+
+		    $User->email = $request->input('email'),
+	        $User->firstname = $request->input('firstname'),
+	        $User->lastname = $request->input('lastname'),
+	        $User->city = $request->input('city'),
+	        $User->birthday = $request->input('email'),
+	        $User->image = $request->input('image'),			
+	        $User->password  = $request->input('password')
 	]);
-          $Role->name = $request->input('name');
+    
 
-          $Role->save();
+          $User->save();
 
-        return response()->json($Role);
+        return response()->json($User);
 
     }
 
