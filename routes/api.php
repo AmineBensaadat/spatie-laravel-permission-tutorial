@@ -49,7 +49,7 @@ Route::post('user/login', 'APILoginController@login');
 	// update Role
 	Route::put('updateRole/{id}', 'APIRolesController@updateRole');
 	// assigned Role to user
-	Route::post('RoleToUser', 'APIRolesController@RoleToUser');
+	Route::put('RoleToUser/{id_role}/{id_user}', 'APIRolesController@RoleToUser');
 	// removed role from a user
 	Route::post('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');
 

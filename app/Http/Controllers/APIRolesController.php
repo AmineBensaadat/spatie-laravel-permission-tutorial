@@ -49,10 +49,10 @@ class APIRolesController extends Controller
     }
 
     // assigned Role to User
-     public function RoleToUser(Request $request)
+     public function RoleToUser($id_role, $id_user)
     {     
-           $role = Role::findById($request->input('id_role'));
-           $user = User::find($request->input('id_user'));
+           $role = Role::findById($id_role);
+           $user = User::find($id_user);
            $user->assignRole($role);
 
         return response()->json($user);
