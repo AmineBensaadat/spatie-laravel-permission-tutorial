@@ -35,30 +35,12 @@ class APILoginController extends Controller
         }catch(JWTException $e){
           return response()->json( ['error'=> 'could not create token'],500);
         }
-
-
-       /* $data = \DB::table('model_has_roles')
-      ->select('users.name', 'roles.name')
-      ->join('users', 'users.id', '=', 'model_has_roles.model_id')
-      ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
-      ->where('users.id', auth()->user()->id)
-      ->get();*/
-
-
-        //return response()->json( [compact('token'), 'user' =>  auth()->user() ]);
-
-      
-        //return  $data;
-      $user = User::find(auth()->user()->id);
-
-        /*dd($user->roles);
-       $users = User::select([])->with('roles');*/
-
-
-      
-       return response()->json(
-
-        [compact('token'), 'user' =>  auth()->user() , $user->roles->pluck('name') ]);
+        
+         //return response()->json( [compact('token'), 'user' =>  auth()->user()->with('roles')->get()->first() ]);
+         //return response()->json([compact('token'), 'user' =>auth()->user(),auth()->user()->roles->pluck('')->filter()]) ;
+         //return response()->json([auth()->user(),auth()->user()->roles->pluck('')->filter()]) ;
+         
+         return response()->json([compact('token'), 'user' =>auth()->user(),auth()->user()->roles->pluck('')->filter(), auth()->user()->getAllPermissions()->pluck('')->filter()]) ;
         
     }
 

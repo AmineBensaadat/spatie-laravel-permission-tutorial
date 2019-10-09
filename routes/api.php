@@ -52,3 +52,15 @@ Route::post('user/login', 'APILoginController@login');
 	Route::post('RoleToUser', 'APIRolesController@RoleToUser');
 	// removed role from a user
 	Route::post('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');
+
+
+//CRUD Users
+	// get All Roles
+	Route::get('users', 'APIUsersController@getAllUsers');
+	// create Role
+	Route::post('createuser', 'APIUsersController@createUser');
+	// delete Role
+	Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
+	// update Role
+	Route::put('updateUser/{id}', 'APIUsersController@updateUser');
+	
