@@ -55,12 +55,12 @@ Route::post('user/login', 'APILoginController@login');
 
 
 //CRUD Users
-	// get All Roles
+	// get All Users
 	Route::get('users', 'APIUsersController@getAllUsers');
-	// create Role
+	// create Users
 	Route::post('createuser', 'APIUsersController@createUser');
-	// delete Role
+	// delete Users
 	Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
-	// update Role
+	// update Users
 	Route::put('updateUser/{id}', 'APIUsersController@updateUser');
 	
