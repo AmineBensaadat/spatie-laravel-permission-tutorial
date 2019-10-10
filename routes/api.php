@@ -51,7 +51,7 @@ Route::post('user/login', 'APILoginController@login');
 	// assigned Role to user
 	Route::get('RoleToUser/{id_role}/{id_user}', 'APIRolesController@RoleToUser');
 	// removed role from a user
-	Route::get('RemoveRoleToUser', 'APIRolesController@RemoveRoleToUser');
+	Route::get('RemoveRoleToUser/{id_role}/{id_user}', 'APIRolesController@RemoveRoleToUser');
 
 
 //CRUD Users
@@ -63,4 +63,14 @@ Route::post('user/login', 'APILoginController@login');
 	Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
 	// update Users
 	Route::put('updateUser/{id}', 'APIUsersController@updateUser');
+
+//CRUD GYM
+	// get All Users
+	//Route::get('users', 'APIUsersController@getAllUsers');
+	// create Users
+	Route::post('createGym', 'APIGymController@createGym');
+	// delete Users
+	//Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
+	// update Users
+	//Route::put('updateUser/{id}', 'APIUsersController@updateUser');
 	
