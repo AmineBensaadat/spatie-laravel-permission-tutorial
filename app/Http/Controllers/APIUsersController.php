@@ -22,7 +22,10 @@ class APIUsersController extends Controller
 
       $id = auth()->id();
 
-	  $result = User::where('id', '!=', $id)->get();
+	  $result = User::join('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+      ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
+       ->select('users.*', 'model_has_roles.role_id','roles.name')
+      ->where('users.id', '!=', $id)->get();
 
     return $result;
     }
