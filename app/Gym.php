@@ -8,9 +8,8 @@ class Gym extends Model
 {
      protected $table = 'gym';
 
-     protected $fillable = [
-        'name', 'id_user'
-    ];
+    protected $guarded = [];
+
     
-    public $timestamps = false;
+    //public $timestamps = false;
 }

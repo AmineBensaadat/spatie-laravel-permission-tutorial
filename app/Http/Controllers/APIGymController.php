@@ -47,5 +47,14 @@ class APIGymController extends Controller
 
          return response()->json($Gym);
     }
+
+    public function getAllGymByUserId($id_user){
+
+	$gym = Gym::where('id_user', $id_user)
+	               ->orderBy('id_gym', 'desc')
+	               ->get();
+
+        return response()->json($gym) ;
+    }
     
 }

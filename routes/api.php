@@ -65,9 +65,9 @@ Route::post('user/login', 'APILoginController@login');
 	Route::put('updateUser/{id}', 'APIUsersController@updateUser');
 
 //CRUD GYM
-	// get All Users
-	//Route::get('users', 'APIUsersController@getAllUsers');
-	// create Users
+	// get All Gym
+	Route::get('getAllGymByUserId/{id_user}', 'APIGymController@getAllGymByUserId');
+	// create Gym
 	Route::post('createGym', 'APIGymController@createGym');
 	// delete Users
 	//Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');

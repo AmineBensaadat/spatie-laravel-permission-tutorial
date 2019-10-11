@@ -17,11 +17,11 @@ class CreateGymTable extends Migration
             $table->bigIncrements('id_gym');
             $table->integer('id_user');
             $table->string('name');
-            $table->longText('discription');
-            $table->string('address');
-            $table->string('city');
-            $table->string('image');
-            $table->string('phone');
+            $table->longText('discription')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('image')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }
