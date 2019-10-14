@@ -88,9 +88,9 @@ Route::post('user/login', 'APILoginController@login');
 	// get All Subscription
 	Route::get('getAllSubscriptionById_gym/{id_gym}', 'APISubscriptionController@getAllSubscriptionById_gym');
 	// create Subscription
-	Route::post('createSubscription', 'APISubscriptionController@createSubscription');
+	  Route::post('createSubscription', 'APISubscriptionController@createSubscription');
 	// delete Subscription
-	//Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
+	Route::delete('deleteSubscription/{id_Subscription}', 'APISubscriptionController@deleteSubscription');
 	// update Subscription
-	//Route::put('updateUser/{id}', 'APIUsersController@updateUser');
+	Route::put('updateSubscription/{id_Subscription}', 'APISubscriptionController@updateSubscription');
 	

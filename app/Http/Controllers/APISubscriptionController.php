@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Subscription;
+use App\Http\Controllers\DB;
+use Response;
+use Validator;
 
 class APISubscriptionController extends Controller
 {
@@ -33,4 +36,44 @@ class APISubscriptionController extends Controller
 
     return response()->json($result);
     }
+
+
+      public function deleteSubscription($id_Subscription)
+    {
+         $Subscription = Subscription::find($id_Subscription);
+            if($Subscription){
+               $deleted = DB::table('subscription_gym')->delete($id_Subscription); 
+            }else{
+                return response()->json('error');
+            }
+            return response()->json($deleted); 
+    }
+
+
+    public function updateSubscription(Request $request, $id_Subscription){
+		  $Subscription = Subscription::find($id_Subscription);
+
+		           $validator = Validator::make($request -> all(),[
+		           
+		            'name' => 'string|max:255',
+		            'price' => 'integer'
+		        ]);
+
+		       if ($validator -> fails()) {
+		            return response()->json($validator->errors());
+		        }
+
+		        $request->merge([
+		            $Subscription->name = $request->input('name'),
+		            $Subscription->price = $request->input('price')
+		    ]);
+		    
+
+		          $Subscription->save();
+
+		        return response()->json($Subscription);
+
+		    }
+    
+
 }
