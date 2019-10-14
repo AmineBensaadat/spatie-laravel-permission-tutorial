@@ -57,6 +57,7 @@ class APIPermissionController extends Controller
 
     }
 
+    
     // assigned permission to User
      public function PermissionToUser( Request $request)
     {     
@@ -77,4 +78,25 @@ class APIPermissionController extends Controller
         return response()->json($permission);
 
     }
+
+ // assigned permissions to User
+    public function PermissionsToUser($listPermission , $user_id)
+    {
+
+        $user = User::find($user_id);
+        $arr = $listPermission;
+           
+          $data = json_decode($arr);
+          foreach($data as $row)
+                    {
+                     $permission = Permission::findById($row->id);
+                     $user-> givePermissionTo($permission);
+
+                    } 
+
+                    return $user;
+                }
+         
+    
+    
 }

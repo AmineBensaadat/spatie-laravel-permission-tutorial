@@ -32,6 +32,7 @@ class APIRegisterController extends Controller
             'lastname' => $request->get('lastname'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
+            'statut' => 'inactive',
         ]);
 
         $user = User::first();

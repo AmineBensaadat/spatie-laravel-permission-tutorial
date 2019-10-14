@@ -11,9 +11,17 @@ class APIRolesController extends Controller
 {
     public function getAllRoles(){
 
-      $roles = \Spatie\Permission\Models\Role::all();
+      $roles = Role::all();
 
     	return $roles;
+    }
+// get All Roles expect Super ADMIN
+     public function rolesExceptSuper(){
+
+      $roles = Role::select('*')
+      ->where('name', '!=', 'SUPER_ADMIN')->get();
+
+      return $roles;
     }
     
     public function createRole(Request $request)

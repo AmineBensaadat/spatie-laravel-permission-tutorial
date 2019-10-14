@@ -48,6 +48,18 @@ class APIGymController extends Controller
          return response()->json($Gym);
     }
 
+    
+
+          public function deleteUser($id)
+    {
+         $User = User::findOrFail($id);
+		    if($User)
+		       $User->delete(); 
+		    else
+		        return response()->json(error);
+		    return response()->json(null); 
+    }
+
     public function getAllGymByUserId($id_user){
 
 	$gym = Gym::where('id_user', $id_user)

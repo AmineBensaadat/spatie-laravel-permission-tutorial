@@ -33,6 +33,8 @@ Route::post('user/login', 'APILoginController@login');
 	Route::put('updatePermission/{id}', 'APIPermissionController@updatePermission');
 	// assigned permission to Role
 	Route::post('PermissionToRole', 'APIPermissionController@PermissionToRole');
+	// assigned permissions to User
+	Route::get('PermissionsToUser/{user_id}/{listPermission}', 'APIPermissionController@PermissionsToUser');
 	// assigned permission to User
 	Route::post('PermissionToUser', 'APIPermissionController@PermissionToUser');
 	// revoked from a user
@@ -42,6 +44,8 @@ Route::post('user/login', 'APILoginController@login');
 //CRUD Roles
 	// get All Roles
 	Route::get('roles', 'APIRolesController@getAllRoles');
+	// get All Roles expect Super ADMIN
+	Route::get('rolesExceptSuper', 'APIRolesController@rolesExceptSuper');
 	// create Role
 	Route::post('createrole', 'APIRolesController@createRole');
 	// delete Role
@@ -56,13 +60,17 @@ Route::post('user/login', 'APILoginController@login');
 
 //CRUD Users
 	// get All Users
-	Route::get('users', 'APIUsersController@getAllUsers');
+	Route::get('users/{user_id}', 'APIUsersController@getAllUsers');
+	// get All Users creted By
+	Route::get('usersCreatedBy/{user_id}', 'APIUsersController@usersCreatedBy');
 	// create Users
-	Route::post('createuser', 'APIUsersController@createUser');
+	Route::post('createuser/{id_user}', 'APIUsersController@createUser');
 	// delete Users
 	Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
 	// update Users
 	Route::put('updateUser/{id}', 'APIUsersController@updateUser');
+	// approve user
+	Route::get('approveUser/{user_id}', 'APIUsersController@approveUser');
 
 
 //CRUD GYM
@@ -80,7 +88,7 @@ Route::post('user/login', 'APILoginController@login');
 	// get All Subscription
 	//Route::get('getAllGymByUserId/{id_user}', 'APIGymController@getAllGymByUserId');
 	// create Subscription
-	//Route::post('createGym', 'APIGymController@createGym');
+	Route::post('createSubscription', 'APISubscriptionController@createSubscription');
 	// delete Subscription
 	//Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
 	// update Subscription
