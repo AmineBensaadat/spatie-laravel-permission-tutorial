@@ -86,7 +86,7 @@ Route::post('user/login', 'APILoginController@login');
 
 //CRUD Subscription
 	// get All Subscription
-	//Route::get('getAllGymByUserId/{id_user}', 'APIGymController@getAllGymByUserId');
+	Route::get('getAllSubscriptionById_gym/{id_gym}', 'APISubscriptionController@getAllSubscriptionById_gym');
 	// create Subscription
 	Route::post('createSubscription', 'APISubscriptionController@createSubscription');
 	// delete Subscription

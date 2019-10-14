@@ -21,4 +21,16 @@ class APISubscriptionController extends Controller
 
          return response()->json($Subscription);
     }
+
+
+     public function getAllSubscriptionById_gym($id_gym){
+
+     
+
+      $result = Subscription::select('subscription_gym.*')
+      ->where('id_gym', '=', $id_gym)->get();
+      
+
+    return response()->json($result);
+    }
 }
