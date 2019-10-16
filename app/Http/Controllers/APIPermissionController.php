@@ -84,12 +84,11 @@ class APIPermissionController extends Controller
     {
 
         $user = User::find($user_id);
-        $arr = $listPermission;
            
-          $data = json_decode($arr);
-          foreach($data as $row)
+        
+          foreach($listPermission as $row)
                     {
-                     $permission = Permission::findById($row->id);
+                     $permission = Permission::findById($row);
                      $user-> givePermissionTo($permission);
 
                     } 

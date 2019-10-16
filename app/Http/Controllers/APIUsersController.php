@@ -92,16 +92,15 @@ class APIUsersController extends Controller
             return response()->json(null); 
     }
 
-     public function updateUser(Request $request, $id){
+     public function updateUser( Request $request, $id){
   $User = User::find($id);
 
-           $validator = Validator::make($request -> all(),[
+          $validator = Validator::make($request -> all(),[
            
             'firstname' => 'string',
             'lastname' => 'string',
             'city' => 'string|max:255|',
             'birthday' => 'birthday',
-            'image' => 'string',            
             'password' => 'password'
         ]);
 
@@ -109,14 +108,19 @@ class APIUsersController extends Controller
             return response()->json($validator->errors());
         }
 
-        $request->merge([
+       $request->merge([
 
-            //$User->email = $request->input('email'),
+            $User->email = $request->input('email'),
             $User->firstname = $request->input('firstname'),
             $User->lastname = $request->input('lastname'),
-            $User->city = $request->input('city'),
             $User->image = $request->input('image'),            
-            $User->password  = $request->input('password')
+            $User->password  = $request->input('password'),
+            $User->gender = $request->input('gender'),
+            $User->birthday = $request->input('birthday'),
+            $User->cin = $request->input('cin'),
+            $User->city = $request->input('city'),
+            $User->phone = $request->input('phone'),
+            $User->adresse = $request->input('adresse')
     ]);
     
 
@@ -127,7 +131,7 @@ class APIUsersController extends Controller
     }
     
     
-    public function approveUser($user_id){
+public function approveUser($user_id){
         //dd(Permission::get());
 
         DB::beginTransaction();
@@ -147,6 +151,37 @@ class APIUsersController extends Controller
         //assigned all Permission to user
             $permissions = Permission::get();
             $user->syncPermissions($permissions);
+            return response()->json($user);
+
+
+                DB::commit();
+                // all good
+            } catch (\Exception $e) {
+                 DB::rollback();
+                // something went wrong
+            }
+
+
+        }
+
+
+  public function rejecteUser($user_id){
+
+        DB::beginTransaction();
+
+    try {
+
+        //rejecte user
+            $user = User::find($user_id);
+            $user->statut = 'inactif';
+            $user->save();
+
+         //remove all rolle for user
+
+           $user->roles()->detach();
+
+        //reove all Permission to user
+            $user->syncPermissions();
             return response()->json($user);
 
 

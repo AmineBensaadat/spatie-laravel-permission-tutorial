@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Subscription;
-use App\Http\Controllers\DB;
 use Response;
+use DB;
 use Validator;
 
 class APISubscriptionController extends Controller
@@ -32,6 +32,14 @@ class APISubscriptionController extends Controller
 
       $result = Subscription::select('subscription_gym.*')
       ->where('id_gym', '=', $id_gym)->get();
+      
+
+    return response()->json($result);
+    }
+
+    public function getAllSubscription(){
+      $result = Subscription::select('subscription_gym.*')
+     ->get();
       
 
     return response()->json($result);

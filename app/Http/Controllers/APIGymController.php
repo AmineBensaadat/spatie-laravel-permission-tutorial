@@ -63,10 +63,53 @@ class APIGymController extends Controller
     public function getAllGymByUserId($id_user){
 
 	$gym = Gym::where('id_user', $id_user)
-	               ->orderBy('id_gym', 'desc')
+	               ->orderBy('id', 'desc')
 	               ->get();
 
         return response()->json($gym) ;
     }
+
+     public function getAllGym(){
+
+    $gym = Gym::select('*')
+                   ->orderBy('id', 'desc')
+                   ->get();
+
+        return response()->json($gym) ;
+    }
+    // update Gym
+         public function updateGym( Request $request, $id){
+            $gym = Gym::find($id);
+
+
+                   $validator = Validator::make($request -> all(),[
+                   
+                    'name' => 'string',
+                    'discription' => 'string',
+                    'address' => 'string|max:255|',
+                    'city' => 'string',
+                    'image' => 'string',            
+                ]);
+
+               if ($validator -> fails()) {
+                    return response()->json($validator->errors());
+                }
+
+               $request->merge([
+
+                    $gym->name = $request->input('name'),
+                    $gym->discription = $request->input('discription'),
+                    $gym->address = $request->input('address'),
+                    $gym->city = $request->input('city'),            
+                    $gym->image  = $request->input('image'),
+                    $gym->phone = $request->input('phone')
+            ]);
+            
+
+                  $gym->save();
+
+                return response()->json($gym);
+
+            }
     
 }
