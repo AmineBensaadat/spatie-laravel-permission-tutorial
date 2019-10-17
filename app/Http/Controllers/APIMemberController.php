@@ -46,11 +46,18 @@ class APIMemberController extends Controller
 	            'last_expire_date' => 'in dev',
 	            'on_pause_days' => 'in dev',
 	            'left_to_pay' => ' in dev',
-	            'id_Subscription' => $request->get('description')
+	            'id_Subscription' => $request->get('id_Subscription')
 	        ]);
 
 	     
 	        return Response::json($member_created);
 	    }
 
+	      public function getAllMembers(){
+
+		      $result = Members::select('members.*', 'subscription_gym.name as subscription')
+		      ->join('subscription_gym', 'subscription_gym.id', '=', 'members.id_Subscription')
+		      ->get();
+		       return Response::json($result);
+		    }
 }
