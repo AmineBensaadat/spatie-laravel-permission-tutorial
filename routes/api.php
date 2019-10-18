@@ -115,4 +115,15 @@ Route::post('user/login', 'APILoginController@login');
 	// update Subscription
 	//Route::put('updateSubscription/{id_Subscription}', 'APISubscriptionController@updateSubscription');
 	
+//CRUD Payment History
+	// get All Payment History By id member
+	Route::get('getAllPayment_historyBymember/{id_member}', 'APIPayment_historyController@getAllPayment_historyBymember');
+	// get All Members
+	//Route::get('getAllMembers', 'APIMemberController@getAllMembers');
+	// create Member
+	//Route::post('createMember', 'APIMemberController@createMember');
+	// delete Subscription
+	//Route::delete('deleteSubscription/{id_Subscription}', 'APISubscriptionController@deleteSubscription');
+	// update Subscription
+	//Route::put('updateSubscription/{id_Subscription}', 'APISubscriptionController@updateSubscription');
 	

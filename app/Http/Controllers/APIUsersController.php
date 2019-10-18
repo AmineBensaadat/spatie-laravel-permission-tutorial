@@ -114,7 +114,7 @@ class APIUsersController extends Controller
             $User->firstname = $request->input('firstname'),
             $User->lastname = $request->input('lastname'),
             $User->image = $request->input('image'),            
-            $User->password  = $request->input('password'),
+            $User->password  = bcrypt($request->input('password')),
             $User->gender = $request->input('gender'),
             $User->birthday = $request->input('birthday'),
             $User->cin = $request->input('cin'),
