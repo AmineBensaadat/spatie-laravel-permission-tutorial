@@ -17,10 +17,10 @@ use JWTAuth;
 class APIGymController extends Controller
 {
 
-     public function createGym(Request $request)
+         public function createGym(Request $request)
     {
-    	
-           $validator = Validator::make($request -> all(),[
+
+          $validator = Validator::make($request -> all(),[
             'name' => 'required',
             'id_user' => 'integer',
             
@@ -31,40 +31,48 @@ class APIGymController extends Controller
             return response()->json($validator->errors());
         }
 
-        $Gym = Gym::create([
+        if(!$request->hasFile('image')) {
+        return response()->json(['upload_file_not_found'], 400);
+          }
+          $file = $request->file('image');
+          if(!$file->isValid()) {
+              return response()->json(['invalid_file_upload'], 400);
+          }
+          $path = public_path() . '/uploads/images/store/';
+          $name = time().'.'.$file->getClientOriginalExtension();
+          $file->move($path, $name);
+
+          $Gym = Gym::create([
 
             'name' => $request->get('name'),
             'id_user' => $request->get('id_user'),
             'discription' => $request->get('discription'),
             'address' => $request->get('address'),
             'city' => $request->get('city'),
-            'image' => $request->get('image'),
+            'image' => $name,
             'phone' => $request->get('phone')
             
         ]);
 
-       
-
-         return response()->json($Gym);
+          return response()->json($Gym);
     }
 
-    
 
           public function deleteUser($id)
     {
          $User = User::findOrFail($id);
-		    if($User)
-		       $User->delete(); 
-		    else
-		        return response()->json(error);
-		    return response()->json(null); 
+        if($User)
+           $User->delete(); 
+        else
+            return response()->json(error);
+        return response()->json(null); 
     }
 
     public function getAllGymByUserId($id_user){
 
-	$gym = Gym::where('id_user', $id_user)
-	               ->orderBy('id', 'desc')
-	               ->get();
+  $gym = Gym::where('id_user', $id_user)
+                 ->orderBy('id', 'desc')
+                 ->get();
 
         return response()->json($gym) ;
     }
@@ -87,8 +95,7 @@ class APIGymController extends Controller
                     'name' => 'string',
                     'discription' => 'string',
                     'address' => 'string|max:255|',
-                    'city' => 'string',
-                    'image' => 'string',            
+                    'city' => 'string'       
                 ]);
 
                if ($validator -> fails()) {

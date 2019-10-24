@@ -63,8 +63,12 @@ Route::post('user/login', 'APILoginController@login');
 	Route::get('users/{user_id}', 'APIUsersController@getAllUsers');
 	// get All Users creted By
 	Route::get('usersCreatedBy/{user_id}', 'APIUsersController@usersCreatedBy');
+	// get All Coach By Gym
+	Route::get('getAllCoachByGym/{id_gym}', 'APIUsersController@getAllCoachByGym');
+	// create gym by coach
+	Route::get('getGymByCoach/{id_user}', 'APIUsersController@getGymByCoach');
 	// create Users
-	Route::post('createuser/{id_user}', 'APIUsersController@createUser');
+	Route::post('createuser/{id_user}/{id_gym}', 'APIUsersController@createUser');
 	// delete Users
 	Route::delete('deleteUser/{id}', 'APIUsersController@deleteUser');
 	// update Users
@@ -73,9 +77,6 @@ Route::post('user/login', 'APILoginController@login');
 	Route::get('approveUser/{user_id}', 'APIUsersController@approveUser');
 	// rejecte user
 	Route::get('rejecteUser/{user_id}', 'APIUsersController@rejecteUser');
-
-	
-
 
 //CRUD GYM
 	// get All Gym by ID USER
@@ -104,8 +105,8 @@ Route::post('user/login', 'APILoginController@login');
 
 	
 //CRUD Members
-	// get All Subscription By Gym
-	//Route::get('getAllSubscriptionById_gym/{id_gym}', 'APISubscriptionController@getAllSubscriptionById_gym');
+	// get All Members By Gym
+	Route::get('getAllMembersById_gym/{id_gym}', 'APIMemberController@getAllMembersById_gym');
 	// get All Members
 	Route::get('getAllMembers', 'APIMemberController@getAllMembers');
 	// create Member

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User; 
+use App\Gym;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
@@ -34,7 +35,7 @@ class APIUsersController extends Controller
     return $result;
     }
     
-    public function createUser(Request $request, $id_user)
+    public function createUser(Request $request, $id_user, $id_gym)
     {
         
              $validator = Validator::make($request -> all(),[
@@ -61,8 +62,22 @@ class APIUsersController extends Controller
             'city' => $request->get('city'),
             'phone' => $request->get('phone'),
             'creted_by' => $id_user,
-            'adresse' => $request->get('adresse')
+            'adresse' => $request->get('adresse'),
+            'statut' => 'active'
         ]);
+
+       // add rolle to user
+        $role = Role::findByName('COACH');
+        //assigned role ADMIN to user
+        $user_created->assignRole($role);
+
+        // insert In coash 
+         $coach = array(
+          'id_user' => $user_created->id,
+          'id_gym' => $id_gym
+         );
+        DB::table('coach')->insert($coach);
+
 
      
         return Response::json($user_created);
@@ -78,6 +93,30 @@ class APIUsersController extends Controller
 
       return response()->json($result);
     }
+
+    public function getAllCoachByGym($id_gym){
+
+        $result = User::select('users.*')
+      ->join('coach', 'coach.id_user', '=', 'users.id')
+       ->where('coach.id_gym', '=', $id_gym)
+      ->get();
+
+      return response()->json($result);
+    }
+
+ public function getGymByCoach($id_user){
+
+
+
+              $gym = Gym::select('*')
+                    ->join('coach', 'coach.id_gym', '=', 'gym.id')
+                    ->where('coach.id_user', '=', $id_user)
+                   ->get();
+
+      return response()->json($gym);
+    }
+
+
     
       public function deleteUser($id)
     {
