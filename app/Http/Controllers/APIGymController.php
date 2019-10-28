@@ -22,7 +22,7 @@ class APIGymController extends Controller
 
           $validator = Validator::make($request -> all(),[
             'name' => 'required',
-            'id_user' => 'integer',
+            'id_user' => 'required',
             
         ]);
 

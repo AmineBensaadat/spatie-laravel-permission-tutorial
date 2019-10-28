@@ -92,4 +92,13 @@ class APIMemberController extends Controller
 		      ->where('members.id_Gym', '=', $id_gym)->get();
 		       return Response::json($result);
 		    }
+
+
+		     public function getSingleMembersById($id){
+
+		      $result = Members::select('members.*', 'subscription_gym.name as subscription')
+		      ->join('subscription_gym', 'subscription_gym.id', '=', 'members.id_Subscription')
+		      ->where('members.id', '=', $id)->get();
+		       return Response::json($result);
+		    }
 }
